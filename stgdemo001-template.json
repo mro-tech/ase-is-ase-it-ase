@@ -1,0 +1,134 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string"
+        },
+        "storageAccountName": {
+            "type": "string"
+        },
+        "accountType": {
+            "type": "string"
+        },
+        "kind": {
+            "type": "string"
+        },
+        "accessTier": {
+            "type": "string"
+        },
+        "supportsHttpsTrafficOnly": {
+            "type": "bool"
+        },
+        "networkAclsBypass": {
+            "type": "string"
+        },
+        "networkAclsDefaultAction": {
+            "type": "string"
+        },
+        "networkAclsVirtualNetworkRules": {
+            "type": "array"
+        },
+        "isHnsEnabled": {
+            "type": "bool"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "apiVersion": "2017-05-10",
+            "type": "Microsoft.Resources/deployments",
+            "name": "updateVirtualNetworkForCreateStorageAccount",
+            "subscriptionId": null,
+            "resourceGroup": "rg-demo-001",
+            "dependsOn": [],
+            "properties": {
+                "mode": "Incremental",
+                "parameters": {},
+                "template": {
+                    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {},
+                    "variables": {},
+                    "resources": [
+                        {
+                            "apiVersion": "2019-02-01",
+                            "name": "vnet-demo-001",
+                            "type": "Microsoft.Network/virtualNetworks",
+                            "location": "westeurope",
+                            "properties": {
+                                "provisioningState": "Succeeded",
+                                "resourceGuid": null,
+                                "addressSpace": {
+                                    "addressPrefixes": [
+                                        "192.168.250.0/23"
+                                    ]
+                                },
+                                "subnets": [
+                                    {
+                                        "name": "snet-demo-001",
+                                        "id": null,
+                                        "etag": "W/\"d7f0f813-b738-4dce-bc0c-e78dd58f58f6\"",
+                                        "properties": {
+                                            "provisioningState": "Succeeded",
+                                            "addressPrefix": "192.168.250.0/24",
+                                            "serviceEndpoints": [
+                                                {
+                                                    "provisioningState": "Succeeded",
+                                                    "service": "Microsoft.KeyVault",
+                                                    "locations": [
+                                                        "*"
+                                                    ]
+                                                },
+                                                {
+                                                    "service": "Microsoft.Storage"
+                                                }
+                                            ],
+                                            "delegations": []
+                                        },
+                                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                                    }
+                                ],
+                                "virtualNetworkPeerings": [],
+                                "enableDdosProtection": false,
+                                "enableVmProtection": false
+                            },
+                            "tags": {
+                                "vnet-demo-001": "demo-001"
+                            }
+                        }
+                    ],
+                    "outputs": {}
+                }
+            }
+        },
+        {
+            "name": "[parameters('storageAccountName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2018-07-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "accessTier": "[parameters('accessTier')]",
+                "supportsHttpsTrafficOnly": "[parameters('supportsHttpsTrafficOnly')]",
+                "networkAcls": {
+                    "bypass": "[parameters('networkAclsBypass')]",
+                    "defaultAction": "[parameters('networkAclsDefaultAction')]",
+                    "ipRules": [],
+                    "virtualNetworkRules": "[parameters('networkAclsVirtualNetworkRules')]"
+                },
+                "isHnsEnabled": "[parameters('isHnsEnabled')]"
+            },
+            "dependsOn": [
+                "Microsoft.Resources/deployments/updateVirtualNetworkForCreateStorageAccount"
+            ],
+            "sku": {
+                "name": "[parameters('accountType')]"
+            },
+            "kind": "[parameters('kind')]",
+            "tags": {
+                "stgdemo001": "demo-001"
+            }
+        }
+    ],
+    "outputs": {}
+}

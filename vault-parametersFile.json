@@ -1,0 +1,86 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "value": "vault-demo-001"
+    },
+    "location": {
+      "value": "westeurope"
+    },
+    "sku": {
+      "value": "Standard"
+    },
+    "accessPolicies": {
+      "value": [
+        {
+          "objectId": "22ecd1b1-c234-4763-9b7d-4bc36e66d07b",
+          "tenantId": null,
+          "permissions": {
+            "keys": [
+              "Get",
+              "List",
+              "Update",
+              "Create",
+              "Import",
+              "Delete",
+              "Recover",
+              "Backup",
+              "Restore"
+            ],
+            "secrets": [
+              "Get",
+              "List",
+              "Set",
+              "Delete",
+              "Recover",
+              "Backup",
+              "Restore"
+            ],
+            "certificates": [
+              "Get",
+              "List",
+              "Update",
+              "Create",
+              "Import",
+              "Delete",
+              "Recover",
+              "Backup",
+              "Restore",
+              "ManageContacts",
+              "ManageIssuers",
+              "GetIssuers",
+              "ListIssuers",
+              "SetIssuers",
+              "DeleteIssuers"
+            ]
+          }
+        }
+      ]
+    },
+    "tenant": {
+      "value": null
+    },
+    "enabledForDeployment": {
+      "value": null
+    },
+    "enabledForTemplateDeployment": {
+      "value": null
+    },
+    "enabledForDiskEncryption": {
+      "value": null
+    },
+    "networkAcls": {
+      "value": {
+        "defaultAction": "Deny",
+        "bypass": "AzureServices",
+        "virtualNetworkRules": [
+          {
+            "id": null
+          }
+        ],
+        "ipRules": []
+      }
+    }
+  }
+}

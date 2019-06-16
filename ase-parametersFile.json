@@ -1,0 +1,57 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vnetName": {
+      "value": "vnet-demo-001"
+    },
+    "location": {
+      "value": "West Europe"
+    },
+    "subnetName": {
+      "value": "snet-demo-001"
+    },
+    "vnetId": {
+      "value": null
+    },
+    "VNetResourceGroupName": {
+      "value": "rg-demo-001"
+    },
+    "vnetAddress": {
+      "value": "192.168.250.0/23"
+    },
+    "subnetAddress": {
+      "value": "192.168.250.0/24"
+    },
+    "subnetRouteTableName": {
+      "value": "ase-demo-001-Route-Table"
+    },
+    "subnetNSGName": {
+      "value": "ase-demo-001-NSG"
+    },
+    "name": {
+      "value": "ase-demo-001"
+    },
+    "subscriptionId": {
+      "value": null
+    },
+    "ilbMode": {
+      "value": 3
+    },
+    "subnetId": {
+      "value": null
+    },
+    "asp-demo-001Name": {
+      "value": null
+    },
+    "asp-demo-001SKU": {
+      "value": "Free"
+    },
+    "asp-demo-001WorkerSize": {
+      "value": "0"
+    },
+    "stg-demo-001Type": {
+      "value": "Standard_LRS"
+    }
+  }
+}
